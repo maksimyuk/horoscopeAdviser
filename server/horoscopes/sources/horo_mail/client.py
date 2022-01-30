@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 from server.horoscopes.base.fabrics import BaseClient
 from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
+from server.horoscopes.sources.horo_mail.scrappers import TodayPredictionScrapper
 
 
 class HoroMailClient(BaseClient):
@@ -17,7 +18,7 @@ class HoroMailClient(BaseClient):
         response.raise_for_status()
 
         content = self.decode_content(response)
-        return self.scrap_data(content)
+        return TodayPredictionScrapper(content).scrap()
 
     def get_requesting_url(self):
         """Returns URL to request."""
@@ -41,9 +42,3 @@ class HoroMailClient(BaseClient):
     def decode_content(self, response: requests.Response) -> str:
         """Returns decoded content."""
         return response.content.decode('utf-8')
-
-    def scrap_data(self, content: str) -> str:
-        soup = BeautifulSoup(content, 'html.parser')
-
-        content_paragraphs = soup.find_all('p')
-        return ''.join((content_paragraph.text for content_paragraph in content_paragraphs))

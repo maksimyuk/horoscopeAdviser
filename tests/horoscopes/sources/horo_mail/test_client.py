@@ -7,4 +7,4 @@ class TestClient:
 
     def test_get_horoscope_by_sign(self):
         horo = HoroMailClient(sign=HoroscopeSigns.LEO).get_horoscope_by_sign()
-        print(horo)
+        assert horo

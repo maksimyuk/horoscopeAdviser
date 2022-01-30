@@ -1,25 +1,15 @@
 
-import requests
 from bs4 import BeautifulSoup
 
-
-class HoroMailRequester:
-    # Seems to set base.
-
-    def get_sign_url(self) -> str:
-        """Returns url for horoscope source."""
-        return 'https://horo.mail.ru/prediction/aries/today/'
-
-    def get_horoscope_source_content(self) -> str:
-        response = requests.get(self.get_sign_url())
-        return response.content.decode()
+from server.horoscopes.base.scrappers import BaseScrapper
 
 
-class HoroMailScrapper:
-    """Scrapper for horo mail. Returns content of horoscope sign."""
+class TodayPredictionScrapper(BaseScrapper):
+    """Scrapper horoscope for today."""
 
-    def get_horoscope(self, content: str):
-        soup = BeautifulSoup(content, 'html.parser')
+    def scrap(self) -> str:
+        """"""
+        soup = BeautifulSoup(self.html_page, 'html.parser')
 
         content_paragraphs = soup.find_all('p')
-        return ''.join((content_paragraph.text for content_paragraph in content_paragraphs))
+        return ' '.join((content_paragraph.text for content_paragraph in content_paragraphs))
