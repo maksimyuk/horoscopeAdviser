@@ -1,8 +1,7 @@
 
 import requests
-from bs4 import BeautifulSoup
 
-from server.horoscopes.base.fabrics import BaseClient
+from server.horoscopes.base.clients import BaseClient
 from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
 from server.horoscopes.sources.horo_mail.scrappers import TodayPredictionScrapper
 
