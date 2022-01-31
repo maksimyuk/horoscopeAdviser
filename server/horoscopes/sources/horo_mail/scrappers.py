@@ -1,6 +1,5 @@
 
 from bs4 import BeautifulSoup
-
 from server.horoscopes.base.scrappers import BaseScrapper
 
 

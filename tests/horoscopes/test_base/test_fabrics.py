@@ -1,5 +1,8 @@
 
-from server.horoscopes.base.fabrics import BaseRequestFabric, SignDrivenRequestFabric
+from server.horoscopes.base.fabrics import (
+    BaseRequestFabric,
+    SignDrivenRequestFabric,
+)
 from server.horoscopes.enums import HoroscopeSigns
 
 

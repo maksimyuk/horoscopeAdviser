@@ -1,9 +1,10 @@
 
 import requests
-
 from server.horoscopes.base.clients import BaseClient
+from server.horoscopes.sources.horo_mail.scrappers import (
+    TodayPredictionScrapper,
+)
 from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
-from server.horoscopes.sources.horo_mail.scrappers import TodayPredictionScrapper
 
 
 class HoroMailClient(BaseClient):

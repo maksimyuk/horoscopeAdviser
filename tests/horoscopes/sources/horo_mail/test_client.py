@@ -1,6 +1,6 @@
 
-from server.horoscopes.sources.horo_mail.client import HoroMailClient
 from server.horoscopes.enums import HoroscopeSigns
+from server.horoscopes.sources.horo_mail.client import HoroMailClient
 
 
 class TestClient:

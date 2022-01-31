@@ -1,6 +1,9 @@
 
 from server.horoscopes.enums import HoroscopeSigns
-from server.horoscopes.sources.horo_mail.fabrics import BaseMailRequestFabric, TodayHoroscopeRequestFabric
+from server.horoscopes.sources.horo_mail.fabrics import (
+    BaseMailRequestFabric,
+    TodayHoroscopeRequestFabric,
+)
 from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
 
 

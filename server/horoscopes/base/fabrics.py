@@ -1,10 +1,9 @@
 
 import abc
 from typing import Any
-from server.horoscopes.enums import HoroscopeSigns
 
 import requests
-
+from server.horoscopes.enums import HoroscopeSigns
 
 OptionalAnyDictType = dict[str, Any] | None
 
