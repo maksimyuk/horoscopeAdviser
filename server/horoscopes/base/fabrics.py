@@ -21,7 +21,9 @@ class BaseRequestFabric(abc.ABC):
     def base_url(self) -> str:
         """Base url for requests."""
 
-    def __init__(self, params: OptionalAnyDictType = None, data: OptionalAnyDictType = None, method='GET: str', **kwargs):
+    def __init__(
+        self, params: OptionalAnyDictType = None, data: OptionalAnyDictType = None, method='GET: str', **kwargs,
+    ):
         """Init Fabric by request URL, params, data, method."""
         self.params = params
         self.data = data
