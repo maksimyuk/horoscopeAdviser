@@ -1,4 +1,3 @@
-
 from server.horoscopes.enums import HoroscopeSigns
 from server.horoscopes.sources.horo_mail.fabrics import (
     BaseMailRequestFabric,
@@ -26,7 +25,9 @@ class TestTodayHoroscopeRequestFabric:
         fabric = TodayHoroscopeRequestFabric(sign=HoroscopeSigns.LEO)
 
         request = fabric.create()
-        assert request.url == f'{HORO_MAIL_URL}/{HoroscopeSigns.LEO.value.lower()}/today'
+        assert (
+            request.url == f"{HORO_MAIL_URL}/{HoroscopeSigns.LEO.value.lower()}/today"
+        )
 
     def test_created_request(self):
         """Check prepared request has got no params and body."""

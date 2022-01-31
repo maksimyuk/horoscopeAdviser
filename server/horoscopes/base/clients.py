@@ -1,4 +1,3 @@
-
 import abc
 
 from server.horoscopes.enums import HoroscopeSigns

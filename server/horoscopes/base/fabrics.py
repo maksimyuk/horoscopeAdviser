@@ -1,4 +1,3 @@
-
 import abc
 from typing import Any
 
@@ -21,7 +20,11 @@ class BaseRequestFabric(abc.ABC):
         """Base url for requests."""
 
     def __init__(
-        self, params: OptionalAnyDictType = None, data: OptionalAnyDictType = None, method='GET: str', **kwargs,
+        self,
+        params: OptionalAnyDictType = None,
+        data: OptionalAnyDictType = None,
+        method: str = "GET",
+        **kwargs,
     ):
         """Init Fabric by request URL, params, data, method."""
         self.params = params

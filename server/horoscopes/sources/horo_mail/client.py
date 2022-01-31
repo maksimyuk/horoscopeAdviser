@@ -1,4 +1,3 @@
-
 import requests
 from server.horoscopes.base.clients import BaseClient
 from server.horoscopes.sources.horo_mail.scrappers import (
@@ -22,13 +21,13 @@ class HoroMailClient(BaseClient):
 
     def get_requesting_url(self) -> str:
         """Returns URL to request."""
-        return f'{HORO_MAIL_URL}/{self.sign.value.lower()}/today/'
+        return f"{HORO_MAIL_URL}/{self.sign.value.lower()}/today/"
 
     def create_request_object(self) -> requests.Request:
         """Build Request object by params."""
 
         return requests.Request(
-            method='GET',
+            method="GET",
             url=self.get_requesting_url(),
         )
 
@@ -41,4 +40,4 @@ class HoroMailClient(BaseClient):
 
     def decode_content(self, response: requests.Response) -> str:
         """Returns decoded content."""
-        return response.content.decode('utf-8')
+        return response.content.decode("utf-8")

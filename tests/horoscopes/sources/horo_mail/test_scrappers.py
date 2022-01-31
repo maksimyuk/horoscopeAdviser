@@ -1,4 +1,3 @@
-
 import pytest
 from server.horoscopes.sources.horo_mail.scrappers import (
     TodayPredictionScrapper,
@@ -30,10 +29,10 @@ class TestTodayPredictionScrapper:
         scrapped_data = TodayPredictionScrapper(ok_html_prediction).scrap()
 
         assert scrapped_data
-        assert scrapped_data == 'Par1. Par2.'
+        assert scrapped_data == "Par1. Par2."
 
     def test_empty_prediction(self):
         """Check no failure on empty html page."""
-        scrapped_data = TodayPredictionScrapper('').scrap()
+        scrapped_data = TodayPredictionScrapper("").scrap()
 
         assert not scrapped_data

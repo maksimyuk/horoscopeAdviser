@@ -1,4 +1,3 @@
-
 from server.horoscopes.base.fabrics import SignDrivenRequestFabric
 from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
 
@@ -9,6 +8,7 @@ class BaseMailRequestFabric(SignDrivenRequestFabric):
 
     Only defines base URL.
     """
+
     base_url: str = HORO_MAIL_URL
 
 
@@ -19,4 +19,4 @@ class TodayHoroscopeRequestFabric(BaseMailRequestFabric):
         """Return prepared url for request."""
         url = super().prepare_request_url()
 
-        return f'{url}/{self.sign.value.lower()}/today'
+        return f"{url}/{self.sign.value.lower()}/today"

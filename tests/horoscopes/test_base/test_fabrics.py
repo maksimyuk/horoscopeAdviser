@@ -1,4 +1,3 @@
-
 from server.horoscopes.base.fabrics import (
     BaseRequestFabric,
     SignDrivenRequestFabric,
@@ -8,12 +7,14 @@ from server.horoscopes.enums import HoroscopeSigns
 
 class TestRequestFabric(BaseRequestFabric):
     """Fabric for test purposes."""
-    base_url = 'http://test.com'
+
+    base_url = "http://test.com"
 
 
 class TestSignDrivenRequestFabric(SignDrivenRequestFabric):
     """Fabric for test purposes with sign param."""
-    base_url = 'http://testsign..com'
+
+    base_url = "http://testsign..com"
 
 
 class TestBaseRequestFabric:
@@ -36,7 +37,7 @@ class TestBaseRequestFabric:
 
     def test_create_request_with_params(self):
         """Check created request has params, no data."""
-        fabric = TestRequestFabric(params={'param1': 'test'})
+        fabric = TestRequestFabric(params={"param1": "test"})
 
         request = fabric.create()
 
@@ -45,7 +46,7 @@ class TestBaseRequestFabric:
 
     def test_create_request_with_data(self):
         """Check created request has data, no params."""
-        fabric = TestRequestFabric(data={'data': 'test'})
+        fabric = TestRequestFabric(data={"data": "test"})
 
         request = fabric.create()
 
@@ -54,7 +55,7 @@ class TestBaseRequestFabric:
 
     def test_create_request(self):
         """Check created request has data and params."""
-        fabric = TestRequestFabric(data={'data': 'test'}, params={'param1': 'test'})
+        fabric = TestRequestFabric(data={"data": "test"}, params={"param1": "test"})
 
         request = fabric.create()
 
