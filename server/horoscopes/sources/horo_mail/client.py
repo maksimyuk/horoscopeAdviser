@@ -10,7 +10,7 @@ from server.horoscopes.sources.horo_mail.settings import HORO_MAIL_URL
 class HoroMailClient(BaseClient):
     """Client for interacting with https://horo.mail.ru/prediction"""
 
-    def get_horoscope_by_sign(self, *args, **kwargs):
+    def get_horoscope_by_sign(self, *args, **kwargs) -> str:
         """Returns content for prediction by sign for today."""
         request_object = self.create_request_object()
 
@@ -20,7 +20,7 @@ class HoroMailClient(BaseClient):
         content = self.decode_content(response)
         return TodayPredictionScrapper(content).scrap()
 
-    def get_requesting_url(self):
+    def get_requesting_url(self) -> str:
         """Returns URL to request."""
         return f'{HORO_MAIL_URL}/{self.sign.value.lower()}/today/'
 
