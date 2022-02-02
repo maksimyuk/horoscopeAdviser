@@ -13,10 +13,7 @@ class BaseMethod(abc.ABC):
     requests_fabric: Type[BaseRequestFabric]
     response_scrapper: Type[BaseScrapper]
 
-    def __init__(self, *args, **kwargs) -> None:
-        """Init Method calls by args and kwargs."""
-
-    def execute(self, *args, **kwargs) -> str:
+    def execute(self, **kwargs) -> str:
         """Sends request and returns content."""
         request_fabric = self.requests_fabric(**kwargs)
         return self.requests_sender(

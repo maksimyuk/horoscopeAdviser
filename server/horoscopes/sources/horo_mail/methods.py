@@ -1,9 +1,11 @@
 
 from server.horoscopes.base.methods import BaseMethod
-from server.horoscopes.enums import HoroscopeSigns
+from server.horoscopes.sources.horo_mail.fabrics import TodayHoroscopeRequestFabric
+from server.horoscopes.sources.horo_mail.scrappers import TodayPredictionScrapper
 
 
 class GetTodayPrediction(BaseMethod):
+    """Method for get today prediction."""
 
-    def execute(self, sign: HoroscopeSigns) -> str:
-        ...
+    requests_fabric = TodayHoroscopeRequestFabric
+    response_scrapper = TodayPredictionScrapper
