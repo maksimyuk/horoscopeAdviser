@@ -6,7 +6,7 @@ class BaseMailRequestFabric(SignDrivenRequestFabric):
     """
     Base Request fabric for mail sources Horoscopes.
 
-    Only defines base URL.
+    Only defines base URL for source.
     """
 
     base_url: str = HORO_MAIL_URL
