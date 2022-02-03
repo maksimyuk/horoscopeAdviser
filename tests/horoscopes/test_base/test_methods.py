@@ -1,12 +1,13 @@
-
 from unittest.mock import patch
 
 import pytest
 import requests
-
 from server.horoscopes.base.methods import BaseMethod
 from tests.horoscopes.test_base.test_fabrics import TestRequestFabric
-from tests.horoscopes.test_base.test_scrappers import HTML_CONTENT_EXAMPLE, SimpleTagBasedScrapper
+from tests.horoscopes.test_base.test_scrappers import (
+    HTML_CONTENT_EXAMPLE,
+    SimpleTagBasedScrapper,
+)
 from tests.horoscopes.test_base.test_sender import BaseRequestsSender
 
 
@@ -26,7 +27,7 @@ class TestBaseMethod:
         """Returns instantiated simple base method."""
         return SimpleBaseMethod()
 
-    @patch('server.horoscopes.base.sender.send_request')
+    @patch("server.horoscopes.base.sender.send_request")
     def test_execute(self, patched_send_request, method):
         """Check method returns correct data."""
         response = requests.Response()
@@ -35,4 +36,4 @@ class TestBaseMethod:
         patched_send_request.return_value = response
 
         content = method.execute()
-        assert content == 'List1 List2'
+        assert content == "List1 List2"

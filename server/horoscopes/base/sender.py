@@ -1,6 +1,4 @@
-
 import requests
-
 from server.horoscopes.base.fabrics import BaseRequestFabric
 from server.horoscopes.base.utils import send_request
 
@@ -30,4 +28,4 @@ class BaseRequestsSender:
         """Returns decoded content of response."""
         # Change to decorator
         content = self.get_content()
-        return content.decode('utf-8')
+        return content.decode("utf-8")

@@ -1,7 +1,5 @@
-
 import pytest
 from server.horoscopes.base.scrappers import BaseScrapper, BaseTagBasedScrapper
-
 
 HTML_CONTENT_EXAMPLE = """
     <!DOCTYPE html>
@@ -60,7 +58,8 @@ class TestBaseScrapper:
 
 class SimpleTagBasedScrapper(BaseTagBasedScrapper):
     """Simple tag-based scrapper for test purposes."""
-    html_tag = 'li'
+
+    html_tag = "li"
 
 
 class TestBaseTagBasedScrapper:
@@ -75,12 +74,13 @@ class TestBaseTagBasedScrapper:
         """Check tag data is correct."""
         tag_data = scrapper.get_tag_data()
 
-        assert tag_data == 'List1 List2'
+        assert tag_data == "List1 List2"
 
 
 class PTagBasedScrapper(BaseTagBasedScrapper):
     """Simple tag-based scrapper for test purposes."""
-    html_tag = 'p'
+
+    html_tag = "p"
 
 
 class TestBasePBasedScrapper:
@@ -95,4 +95,4 @@ class TestBasePBasedScrapper:
         """Check tag data is correct."""
         tag_data = scrapper.get_tag_data()
 
-        assert tag_data == 'Par1. Par2.'
+        assert tag_data == "Par1. Par2."

@@ -1,4 +1,5 @@
 import abc
+
 from bs4 import BeautifulSoup
 
 
@@ -35,9 +36,7 @@ class BaseTagBasedScrapper(BaseScrapper):
         """Returns data from <p> html-tags."""
         tags_content = self.parser.find_all(self.html_tag)
 
-        return " ".join(
-            (tag_content.text for tag_content in tags_content)
-        )
+        return " ".join((tag_content.text for tag_content in tags_content))
 
     def get_data_from_html_page(self) -> str:
         """Returns scrapped data from html_page"""

@@ -1,4 +1,3 @@
-
 from server.horoscopes.base.scrappers import BasePBasedScrapper
 
 

@@ -2,8 +2,8 @@ import abc
 from typing import Type
 
 from server.horoscopes.base.fabrics import BaseRequestFabric
-from server.horoscopes.base.sender import BaseRequestsSender
 from server.horoscopes.base.scrappers import BaseScrapper
+from server.horoscopes.base.sender import BaseRequestsSender
 
 
 class BaseMethod(abc.ABC):
