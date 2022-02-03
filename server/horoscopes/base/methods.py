@@ -16,6 +16,8 @@ class BaseMethod(abc.ABC):
     def execute(self, **kwargs) -> str:
         """Sends request and returns content."""
         request_fabric = self.requests_fabric(**kwargs)
-        return self.requests_sender(
+        response_content = self.requests_sender(
             request_fabric=request_fabric
         ).get_decoded_content()
+
+        return self.response_scrapper(html_page=response_content).scrap()

@@ -3,10 +3,7 @@ import pytest
 from server.horoscopes.base.scrappers import BaseScrapper, BaseTagBasedScrapper
 
 
-@pytest.fixture()
-def html_page() -> str:
-    """OK response with content."""
-    return """
+HTML_CONTENT_EXAMPLE = """
     <!DOCTYPE html>
     <html lang="ru-RU">
         <head></head>
@@ -20,6 +17,12 @@ def html_page() -> str:
         </body>
     </html>
     """
+
+
+@pytest.fixture()
+def html_page() -> str:
+    """OK response with content."""
+    return HTML_CONTENT_EXAMPLE
 
 
 class SimpleScrapper(BaseScrapper):
