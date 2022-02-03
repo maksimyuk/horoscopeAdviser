@@ -3,12 +3,12 @@ from unittest.mock import patch
 import pytest
 import requests
 from server.horoscopes.base.methods import BaseMethod
+from server.horoscopes.base.sender import BaseRequestsSender
 from tests.horoscopes.test_base.test_fabrics import TestRequestFabric
 from tests.horoscopes.test_base.test_scrappers import (
     HTML_CONTENT_EXAMPLE,
     SimpleTagBasedScrapper,
 )
-from tests.horoscopes.test_base.test_sender import BaseRequestsSender
 
 
 class SimpleBaseMethod(BaseMethod):
