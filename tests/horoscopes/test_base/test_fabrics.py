@@ -20,6 +20,13 @@ class TestSignDrivenRequestFabric(SignDrivenRequestFabric):
 class TestBaseRequestFabric:
     """Tests for base fabric class."""
 
+    def test_init_by_empty_params(self):
+        """Check default init params for empty params and data."""
+        fabric = TestRequestFabric()
+
+        assert fabric.params == {}
+        assert fabric.data == {}
+
     def test_base_prepare_request(self):
         """Check base prepare_request_url returns base_url."""
         fabric = TestRequestFabric()

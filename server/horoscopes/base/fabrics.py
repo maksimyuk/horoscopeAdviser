@@ -27,21 +27,29 @@ class BaseRequestFabric(abc.ABC):
         **kwargs,
     ):
         """Init Fabric by request URL, params, data, method."""
-        self.params = params
-        self.data = data
+        self.params = params or {}
+        self.data = data or {}
         self.method = method
 
     def prepare_request_url(self) -> str:
         """Return prepared url for request."""
         return self.base_url
 
+    def prepare_params(self) -> dict:
+        """Return prepared params for request."""
+        return self.params
+
+    def prepare_data(self) -> dict:
+        """Return prepared data for request."""
+        return self.data
+
     def create(self) -> requests.Request:
         """Returns created Request object ready-to send."""
         return requests.Request(
             method=self.method,
             url=self.prepare_request_url(),
-            params=self.params,
-            data=self.data,
+            params=self.prepare_params(),
+            data=self.prepare_data(),
         )
 
 
