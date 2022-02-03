@@ -1,8 +1,8 @@
-from server.horoscopes.sources.horo_mail.client import HoroMailClient
 from unittest.mock import patch
-import requests
 
+import requests
 from server.horoscopes.enums import HoroscopeSigns
+from server.horoscopes.sources.horo_mail.client import HoroMailClient
 from tests.horoscopes.test_base.test_scrappers import HTML_CONTENT_EXAMPLE
 
 
@@ -16,6 +16,8 @@ class TestHoroMailClient:
 
         patched_send_request.return_value = response
 
-        today_horoscope = HoroMailClient().get_today_horoscope_by_sign(sign=HoroscopeSigns.PISCES)
+        today_horoscope = HoroMailClient().get_today_horoscope_by_sign(
+            sign=HoroscopeSigns.PISCES
+        )
 
         assert today_horoscope == "Par1. Par2."

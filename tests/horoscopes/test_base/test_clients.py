@@ -1,7 +1,6 @@
-
 from unittest.mock import patch
-import requests
 
+import requests
 from server.horoscopes.base.clients import BaseClient
 from server.horoscopes.enums import HoroscopeSigns
 from tests.horoscopes.test_base.test_methods import SimpleBaseMethod
