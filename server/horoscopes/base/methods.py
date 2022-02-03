@@ -9,7 +9,7 @@ from server.horoscopes.base.scrappers import BaseScrapper
 class BaseMethod(abc.ABC):
     """Base class for interacting and returning content."""
 
-    requests_sender: Type[BaseRequestsSender]
+    requests_sender: Type[BaseRequestsSender] = BaseRequestsSender
     requests_fabric: Type[BaseRequestFabric]
     response_scrapper: Type[BaseScrapper]
 
