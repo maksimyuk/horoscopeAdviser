@@ -22,7 +22,13 @@ class BaseRequestsSender:
     def get_content(self) -> bytes:
         """Returns raw content of response."""
         response = self.get_response()
+
+        response.raise_for_status()
+
         return response.content
+
+    def get_charset(self) -> str:
+        """Returns value of meta charset."""
 
     def get_decoded_content(self) -> str:
         """Returns decoded content of response."""
