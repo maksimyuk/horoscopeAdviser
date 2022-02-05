@@ -1,10 +1,8 @@
-
 from unittest.mock import patch
 
 import pytest
 import requests
 from server.horoscopes.base.sender import BaseRequestsSender
-from tests.horoscopes.test_base.example_helpers import get_html_example_1251_encoding
 from tests.horoscopes.test_base.test_fabrics import TestRequestFabric
 
 
@@ -45,16 +43,15 @@ class TestBaseRequestsSender:
         response = requests.Response()
 
         encoding = request_sender.get_response_encoding(response)
-        assert encoding == 'utf-8'
+        assert encoding == "utf-8"
 
     def test_get_response_encoding_from_request(self, request_sender):
         """Check encoding value from response."""
         response = requests.Response()
-        response.encoding = 'windows-1251'
+        response.encoding = "windows-1251"
 
         encoding = request_sender.get_response_encoding(response)
         assert encoding == response.encoding
-
 
     @patch("server.horoscopes.base.sender.send_request")
     def test_get_decoded_content(

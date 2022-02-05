@@ -35,11 +35,11 @@ class BaseRequestFabric(abc.ABC):
         """Return prepared url for request."""
         return self.base_url
 
-    def prepare_params(self) -> dict:
+    def prepare_params(self) -> dict[str, Any]:
         """Return prepared params for request."""
         return self.params
 
-    def prepare_data(self) -> dict:
+    def prepare_data(self) -> dict[str, Any]:
         """Return prepared data for request."""
         return self.data
 

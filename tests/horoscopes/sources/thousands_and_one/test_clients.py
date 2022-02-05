@@ -2,7 +2,9 @@ from unittest.mock import patch
 
 import requests
 from server.horoscopes.enums import HoroscopeSigns
-from server.horoscopes.sources.thousand_and_one.client import ThousandAndOneClient
+from server.horoscopes.sources.thousand_and_one.client import (
+    ThousandAndOneClient,
+)
 from tests.horoscopes.test_base.test_scrappers import HTML_CONTENT_EXAMPLE
 
 

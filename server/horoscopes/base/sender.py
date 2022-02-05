@@ -22,11 +22,7 @@ class BaseRequestsSender:
     @staticmethod
     def get_response_encoding(response: requests.Response) -> str:
         """Returns response encoding or default."""
-        return (
-            response.encoding
-            if response.encoding
-            else "utf-8"
-        )
+        return response.encoding if response.encoding else "utf-8"
 
     def get_decoded_content(self) -> str:
         """Returns decoded content of response."""

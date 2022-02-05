@@ -1,13 +1,13 @@
-
 import pytest
 import requests
-
 from server.horoscopes.enums import HoroscopeSigns
 from server.horoscopes.sources.thousand_and_one.fabrics import (
     BaseThousandAndOneRequestFabric,
     TodayHoroscopeRequestFabric,
 )
-from server.horoscopes.sources.thousand_and_one.settings import THOUSAND_AND_ONE_URL
+from server.horoscopes.sources.thousand_and_one.settings import (
+    THOUSAND_AND_ONE_URL,
+)
 
 
 class TestBaseThousandAndOneRequestFabric:
@@ -47,7 +47,7 @@ class TestTodayHoroscopeRequestFabric:
 
     def test_params(self, created_request):
         """Check sign value is in params."""
-        assert created_request.params == {'znak': HoroscopeSigns.CANCER.value.lower()}
+        assert created_request.params == {"znak": HoroscopeSigns.CANCER.value.lower()}
 
     def test_data(self, created_request):
         """Check body-data for empty."""

@@ -1,6 +1,7 @@
-
 from server.horoscopes.base.fabrics import SignDrivenRequestFabric
-from server.horoscopes.sources.thousand_and_one.settings import THOUSAND_AND_ONE_URL
+from server.horoscopes.sources.thousand_and_one.settings import (
+    THOUSAND_AND_ONE_URL,
+)
 
 
 class BaseThousandAndOneRequestFabric(SignDrivenRequestFabric):
@@ -12,8 +13,8 @@ class BaseThousandAndOneRequestFabric(SignDrivenRequestFabric):
 class TodayHoroscopeRequestFabric(BaseThousandAndOneRequestFabric):
     """Request fabric for get today horoscope."""
 
-    def prepare_params(self) -> dict:
+    def prepare_params(self) -> dict[str, str]:
         """Returns params for get today horoscope."""
         return {
-            'znak': self.sign.value.lower(),
+            "znak": self.sign.value.lower(),
         }
