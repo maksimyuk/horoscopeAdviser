@@ -52,8 +52,5 @@ jobs:
     - name: Run type checking
       run: poetry run mypy .
 
-    - name: Run migrations
-      run: poetry run python manage.py migrate
-
     - name: Run tests
       run: poetry run pytest
