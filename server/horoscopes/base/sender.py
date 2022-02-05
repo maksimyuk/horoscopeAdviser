@@ -19,19 +19,18 @@ class BaseRequestsSender:
         request = self.create_request()
         return send_request(request)
 
-    def get_content(self) -> bytes:
-        """Returns raw content of response."""
-        response = self.get_response()
-
-        response.raise_for_status()
-
-        return response.content
-
-    def get_charset(self) -> str:
-        """Returns value of meta charset."""
+    @staticmethod
+    def get_response_encoding(response: requests.Response) -> str:
+        """Returns response encoding or default."""
+        return (
+            response.encoding
+            if response.encoding
+            else "utf-8"
+        )
 
     def get_decoded_content(self) -> str:
         """Returns decoded content of response."""
-        # Change to decorator
-        content = self.get_content()
-        return content.decode("utf-8")
+        response = self.get_response()
+        encoding = self.get_response_encoding(response)
+
+        return response.content.decode(encoding)
