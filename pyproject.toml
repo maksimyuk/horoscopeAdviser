@@ -17,6 +17,7 @@ types-requests = "^2.27.8"
 black = "^22.1.0"
 autoconfig = "^5.0.0"
 python-decouple = "^3.6"
+pyTelegramBotAPI = "^4.4.0"
 
 [tool.poetry.dev-dependencies]
 
