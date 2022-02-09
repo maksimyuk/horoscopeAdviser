@@ -1,4 +1,4 @@
 
 from server.settings.components import config
 
-SECRET_KEY = config("SECRET_KEY")
+SECRET_TOKEN = config("SECRET_TOKEN")
