@@ -16,3 +16,11 @@ class HoroscopeSigns(Enum):
     CAPRICORN = "CAPRICORN"
     AQUARIUS = "AQUARIUS"
     PISCES = "PISCES"
+
+
+def get_all_horoscope_signs() -> list[str]:
+    """Return list of HoroscopeSigns values as string."""
+    return [
+        sign.value.capitalize()
+        for sign in HoroscopeSigns
+    ]
