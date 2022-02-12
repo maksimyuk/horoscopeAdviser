@@ -24,3 +24,8 @@ def get_all_horoscope_signs() -> list[str]:
         sign.value.capitalize()
         for sign in HoroscopeSigns
     ]
+
+
+def get_horoscope_sign_enum_by_value(value: str) -> HoroscopeSigns:
+    """Returns HoroscopeSigns enum by any value."""
+    return HoroscopeSigns[value.upper()]
