@@ -36,4 +36,4 @@ class TestBaseMethod:
         patched_send_request.return_value = response
 
         content = method.execute()
-        assert content == "List1 List2"
+        assert "List1 List2" in content

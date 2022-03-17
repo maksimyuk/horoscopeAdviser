@@ -22,4 +22,4 @@ class TestThousandAndOneClient:
             sign=HoroscopeSigns.PISCES
         )
 
-        assert today_horoscope == "Par1. Par2."
+        assert "Par1. Par2." in today_horoscope

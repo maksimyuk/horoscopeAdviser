@@ -24,4 +24,4 @@ class TestGetTodayPrediction:
         patched_send_request.return_value = response
 
         content = method.execute(sign=HoroscopeSigns.LEO)
-        assert content == "Par1. Par2."
+        assert "Par1. Par2." in content

@@ -33,7 +33,7 @@ class BaseTagBasedScrapper(BaseScrapper):
         """HTML-tag with content."""
 
     def get_tag_data(self) -> str:
-        """Returns data from <p> html-tags."""
+        """Returns data from given html-tags."""
         tags_content = self.parser.find_all(self.html_tag)
 
         return " ".join((tag_content.text for tag_content in tags_content))

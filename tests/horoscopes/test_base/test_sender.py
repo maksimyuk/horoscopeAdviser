@@ -24,12 +24,6 @@ def mocked_response() -> requests.Response:
 class TestBaseRequestsSender:
     """Tests for checking sender of requests."""
 
-    def test_create_request(self, request_sender):
-        """Check sender's create request returns Request object."""
-        request = request_sender.create_request()
-
-        assert isinstance(request, requests.Request)
-
     @patch("server.horoscopes.base.sender.send_request")
     def test_get_response(self, patched_send_request, request_sender):
         """Check on request returns response."""

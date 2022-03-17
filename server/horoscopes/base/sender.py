@@ -8,16 +8,11 @@ class BaseRequestsSender:
 
     def __init__(self, request_fabric: BaseRequestFabric):
         """Sender initiates by instantiated request fabric."""
-        self.request_fabric = request_fabric
-
-    def create_request(self) -> requests.Request:
-        """Returns created request Object."""
-        return self.request_fabric.create()
+        self.request = request_fabric.create()
 
     def get_response(self) -> requests.Response:
         """Returns response to sent request."""
-        request = self.create_request()
-        return send_request(request)
+        return send_request(self.request)
 
     @staticmethod
     def get_response_encoding(response: requests.Response) -> str:

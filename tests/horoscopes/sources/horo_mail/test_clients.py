@@ -17,7 +17,7 @@ class TestHoroMailClient:
         patched_send_request.return_value = response
 
         today_horoscope = HoroMailClient().get_today_horoscope_by_sign(
-            sign=HoroscopeSigns.PISCES
+            sign=HoroscopeSigns.PISCES,
         )
 
-        assert today_horoscope == "Par1. Par2."
+        assert "Par1. Par2." in today_horoscope

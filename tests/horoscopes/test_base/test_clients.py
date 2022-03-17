@@ -28,4 +28,4 @@ class TestBaseClient:
 
         today_horoscope = SimpleClient().get_today_horoscope_by_sign(HoroscopeSigns.LEO)
 
-        assert today_horoscope == "List1 List2"
+        assert "List1 List2" in today_horoscope

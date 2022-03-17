@@ -9,8 +9,7 @@ OptionalAnyDictType = dict[str, Any] | None
 
 class BaseRequestFabric(abc.ABC):
     """
-    Base fabric for requests. Fabric creates requests.
-
+    Base fabric for requests. Fabric creates requests
     Request object by given params, but nor send them.
     """
 
@@ -53,7 +52,7 @@ class BaseRequestFabric(abc.ABC):
         )
 
 
-class SignDrivenRequestFabric(BaseRequestFabric):
+class SignDrivenRequestFabric(BaseRequestFabric, abc.ABC):
     """Fabric of requests with possibility of transferring the sign as parameter."""
 
     def __init__(self, sign: HoroscopeSigns, **kwargs):
