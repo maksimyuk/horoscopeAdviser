@@ -1,11 +1,10 @@
-from telebot import types
-
 from server.horoscopes.enums import (
     get_all_horoscope_signs,
     get_horoscope_sign_enum_by_value,
 )
 from server.horoscopes.sources.horo_mail.client import HoroMailClient
 from server.telegram_bot.bot import bot
+from telebot import types
 
 
 @bot.message_handler(commands=["start", "help"])

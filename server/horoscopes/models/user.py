@@ -1,7 +1,7 @@
 import datetime
-from sqlalchemy import Boolean, Column, DateTime, Integer, func
 
 from server.horoscopes.db.base import Base
+from sqlalchemy import Boolean, Column, DateTime, Integer, func
 
 
 class User(Base):
