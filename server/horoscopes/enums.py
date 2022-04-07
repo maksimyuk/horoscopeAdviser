@@ -20,10 +20,7 @@ class HoroscopeSigns(Enum):
 
 def get_all_horoscope_signs() -> list[str]:
     """Return list of HoroscopeSigns values as string."""
-    return [
-        sign.value.capitalize()
-        for sign in HoroscopeSigns
-    ]
+    return [sign.value.capitalize() for sign in HoroscopeSigns]
 
 
 def get_horoscope_sign_enum_by_value(value: str) -> HoroscopeSigns:

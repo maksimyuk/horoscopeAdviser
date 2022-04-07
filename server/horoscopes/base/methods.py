@@ -26,17 +26,13 @@ class BaseMethod(abc.ABC):
         """Sends request and returns content."""
         request_fabric = self.requests_fabric(**kwargs)
 
-        sender = self.requests_sender(
-            request_fabric=request_fabric
-        )
+        sender = self.requests_sender(request_fabric=request_fabric)
         response_content = sender.get_decoded_content()
 
         scrapped_content = self.response_scrapper(html_page=response_content).scrap()
 
         # show source of content
         if self.show_source:
-            return "\n".join(
-                (scrapped_content, self.get_source_info(sender.request))
-            )
+            return "\n".join((scrapped_content, self.get_source_info(sender.request)))
 
         return scrapped_content
