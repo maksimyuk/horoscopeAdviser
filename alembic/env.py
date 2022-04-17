@@ -1,5 +1,5 @@
-from alembic import context
 from dotenv import dotenv_values
+from alembic import context
 from server.horoscopes.db.base import Base
 from sqlalchemy import engine_from_config, pool
 
