@@ -10,7 +10,7 @@ class Base:
     id: int = Column(Integer, primary_key=True, index=True)
     __name__: str
 
-    @declared_attr
+    @declared_attr  # type: ignore
     def __tablename__(cls) -> str:  # noqa: N805
         """Generate __tablename__ automatically."""
         return "{name}s".format(name=inflection.underscore(cls.__name__))

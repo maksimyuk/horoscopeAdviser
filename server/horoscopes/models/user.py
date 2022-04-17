@@ -1,6 +1,6 @@
 import datetime
 
-from server.horoscopes.db.base import Base
+from server.horoscopes.db.base import Base  # type: ignore
 from sqlalchemy import Column, DateTime, Integer, func
 
 
