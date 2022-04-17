@@ -44,7 +44,7 @@ jobs:
       with:
         path: .venv
         key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-        
+
     - name: Install deps
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install

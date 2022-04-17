@@ -1,7 +1,7 @@
 """Initial models
 
 Revision ID: 6038c550e8e9
-Revises: 
+Revises:
 Create Date: 2022-04-17 18:52:12.839005
 
 """

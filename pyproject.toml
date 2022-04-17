@@ -9,12 +9,7 @@ license = "MIT"
 python = "^3.10"
 beautifulsoup4 = "^4.10.0"
 requests = "^2.27.1"
-pytest = "^6.2.5"
-flake8 = "^4.0.1"
-mypy = "^0.931"
-isort = "^5.10.1"
 types-requests = "^2.27.8"
-black = "^22.1.0"
 autoconfig = "^5.0.0"
 python-decouple = "^3.6"
 pyTelegramBotAPI = "^4.4.0"
@@ -25,6 +20,12 @@ python-dotenv = "^0.20.0"
 psycopg2-binary = "^2.9.3"
 
 [tool.poetry.dev-dependencies]
+black = "^22.1.0"
+mypy = "^0.931"
+pytest = "^6.2.5"
+flake8 = "^4.0.1"
+isort = "^5.10.1"
+pre-commit = "^2.18.1"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
