@@ -26,3 +26,10 @@ def get_all_horoscope_signs() -> list[str]:
 def get_horoscope_sign_enum_by_value(value: str) -> HoroscopeSigns:
     """Returns HoroscopeSigns enum by any value."""
     return HoroscopeSigns[value.upper()]
+
+
+class NotificationFrequency(Enum):
+    """Enum for describing types of notification frequency."""
+
+    DAILY = "DAILY"
+    WEEKLY = "WEEKLY"
