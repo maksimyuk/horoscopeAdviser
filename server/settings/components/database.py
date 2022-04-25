@@ -13,6 +13,3 @@ def get_database_url() -> str:
         database_uri = "_".join([database_uri, "test"])
 
     return database_uri
-
-
-SQLALCHEMY_DATABASE_URI = get_database_url()

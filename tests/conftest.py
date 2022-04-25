@@ -41,21 +41,16 @@ def temp_db_engine(temp_db):
         engine.dispose()
 
 
-# Apply migrations at beginning and end of testing session
 @pytest.fixture(scope="session")
 def apply_migrations(temp_db):
+    """Apply migrations at beginning and end of testing session"""
     # https://www.jeffastor.com/blog/testing-fastapi-endpoints-with-docker-and-pytest#about-testing
     config = Config("alembic.ini")
     alembic.command.upgrade(config, "head")
     yield
-    alembic.command.downgrade(config, "base")
 
 
 @pytest.fixture()
 def temp_db_session(temp_db_engine, apply_migrations):
     """Fixture for generating test db session."""
-    # SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=temp_db_engine)
-    # session = scoped_session(SessionLocal)
-    #
-    # yield SessionLocal
     yield Session(temp_db_engine)
