@@ -5,9 +5,9 @@ from server.horoscopes.services import UserManager
 class TestUserManager:
     """Test-case for checking work of base operations with User-model."""
 
-    def test_create_user(self, db):
-        assert db.query(User).count() == 0
+    def test_create_user(self, temp_db_session):
+        assert temp_db_session.query(User).count() == 0
 
-        UserManager().create(telegram_user_id=1)
+        UserManager().create(telegram_user_id=1, session=temp_db_session)
 
-        assert db.query(User).count() == 1
+        assert temp_db_session.query(User).count() == 1

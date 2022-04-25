@@ -1,12 +1,12 @@
-from dotenv import dotenv_values
 from alembic import context
-from server.horoscopes.db.base import Base
 from sqlalchemy import engine_from_config, pool
+
+from server.horoscopes.db.base import Base
+from server.settings.components.database import get_database_url
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-env_config = dotenv_values("config/.env")
 
 # add your model's MetaData object here
 # for 'autogenerate' support
@@ -18,11 +18,6 @@ target_metadata = Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-
-
-def get_database_url() -> str:
-    """Returns URL for database."""
-    return env_config.get("DATABASE_URI")
 
 
 def run_migrations_offline():
