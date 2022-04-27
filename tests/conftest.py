@@ -16,7 +16,7 @@ def set_test_environment():
 
 
 @pytest.fixture(scope="session")
-def temp_db(set_test_environment) -> str:
+def temp_db(set_test_environment):
     """Fixture for generating test db URL."""
     tmp_db_url = get_database_url()
 

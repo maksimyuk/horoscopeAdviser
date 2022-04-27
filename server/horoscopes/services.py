@@ -6,7 +6,7 @@ from sqlalchemy.orm import Session
 class UserManager:
     """Manager for User model."""
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.model = User
 
     def create(self, telegram_user_id: int, session: Session = _session) -> User:
