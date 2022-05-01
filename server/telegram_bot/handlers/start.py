@@ -6,6 +6,6 @@ def start_handler(message: Message, bot: TeleBot):
     """Process start command."""
     welcome_message = (
         "Бот возвращающий данные по гороскопу "
-        "на сегодняшний день согласно выбранному знаку зодиака. "
+        "на согласно выбранному знаку зодиака и источнику. "
     )
     bot.reply_to(message, welcome_message)

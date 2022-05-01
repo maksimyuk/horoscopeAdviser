@@ -1,9 +1,12 @@
 import telebot
 from server.settings.components.telegram_bot import SECRET_TOKEN
 from server.telegram_bot.handlers import (
-    dumb_handler,
     get_today_horoscope_by_sign_handler,
     start_handler,
+    subscription_callback_add,
+    subscription_callback_delete,
+    subscription_callback_edit,
+    subscription_handler,
     unknown_command_handler,
 )
 
@@ -19,6 +22,11 @@ def register_message_handlers() -> None:
         pass_bot=True,
     )
     bot.register_message_handler(
+        subscription_handler,
+        commands=["subscription"],
+        pass_bot=True,
+    )
+    bot.register_message_handler(
         unknown_command_handler, func=lambda m: True, pass_bot=True
     )
 
@@ -26,7 +34,22 @@ def register_message_handlers() -> None:
 def register_callback_handlers() -> None:
     """Register all callback handlers to bot."""
     bot.register_callback_query_handler(
-        dumb_handler,
+        subscription_callback_add,
+        func=lambda call: call.data == "subscription-add",
+        pass_bot=True,
+    )
+    bot.register_callback_query_handler(
+        subscription_callback_edit,
+        func=lambda call: call.data == "subscription-edit",
+        pass_bot=True,
+    )
+    bot.register_callback_query_handler(
+        subscription_callback_delete,
+        func=lambda call: call.data == "subscription-delete",
+        pass_bot=True,
+    )
+    bot.register_callback_query_handler(
+        subscription_callback_add,
         func=lambda call: True,
         pass_bot=True,
     )
