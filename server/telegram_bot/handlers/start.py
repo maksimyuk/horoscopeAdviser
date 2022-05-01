@@ -2,8 +2,8 @@ from telebot import TeleBot
 from telebot.types import Message
 
 
-def send_welcome(message: Message, bot: TeleBot):
-    """Обработка приветственного сообщения и опроса мануала."""
+def start_handler(message: Message, bot: TeleBot):
+    """Process start command."""
     welcome_message = (
         "Бот возвращающий данные по гороскопу "
         "на сегодняшний день согласно выбранному знаку зодиака. "
