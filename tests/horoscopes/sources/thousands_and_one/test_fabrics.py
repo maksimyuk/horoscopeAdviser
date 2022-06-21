@@ -1,5 +1,6 @@
 import pytest
 import requests
+
 from server.horoscopes.enums import HoroscopeSigns
 from server.horoscopes.sources.thousand_and_one.fabrics import (
     BaseThousandAndOneRequestFabric,

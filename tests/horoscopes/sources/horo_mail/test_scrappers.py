@@ -1,4 +1,5 @@
 import pytest
+
 from server.horoscopes.sources.horo_mail.scrappers import (
     TodayPredictionScrapper,
 )

@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 import requests
+
 from server.horoscopes.enums import HoroscopeSigns
 from server.horoscopes.sources.horo_mail.client import HoroMailClient
 from tests.horoscopes.test_base.test_scrappers import HTML_CONTENT_EXAMPLE

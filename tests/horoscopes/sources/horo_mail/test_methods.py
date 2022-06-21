@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 import requests
+
 from server.horoscopes.enums import HoroscopeSigns
 from server.horoscopes.sources.horo_mail.methods import GetTodayPrediction
 from tests.horoscopes.test_base.test_scrappers import HTML_CONTENT_EXAMPLE

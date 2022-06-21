@@ -1,19 +1,15 @@
-from telebot import TeleBot
-from telebot.types import Message
+from aiogram.types import Message
 
-from .sign import (  # noqa: F401
-    dumb_handler,
-    get_today_horoscope_by_sign_handler,
-)
-from .start import start_handler  # noqa: F401
-from .subscription import (  # noqa: F401
-    subscription_callback_add,
-    subscription_callback_delete,
-    subscription_callback_edit,
-    subscription_handler,
-)
+# from .sign import (  # noqa: F401
+#     dumb_handler,
+#     get_today_horoscope_by_sign_handler,
+# )
+# from .start import start_handler  # noqa: F401
+from .subscription import register_subscription_message_handlers  # noqa: F401
 
 
-def unknown_command_handler(message: Message, bot: TeleBot):
+async def unknown_command_handler(
+    message: Message,
+):
     """Handler for unknown command."""
-    bot.reply_to(message, f"Неизвестный ответ: ({message.text})")
+    await message.answer(f"Неизвестный ответ: ({message.text})")

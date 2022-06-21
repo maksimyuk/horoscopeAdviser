@@ -1,4 +1,5 @@
 import pytest
+
 from server.horoscopes.base.scrappers import BaseScrapper, BaseTagBasedScrapper
 
 HTML_CONTENT_EXAMPLE = """

@@ -1,4 +1,5 @@
 import requests
+
 from server.horoscopes.base.fabrics import BaseRequestFabric
 from server.horoscopes.base.utils import send_request
 
