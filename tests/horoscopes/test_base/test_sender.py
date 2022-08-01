@@ -2,6 +2,7 @@ from unittest.mock import patch
 
 import pytest
 import requests
+
 from server.horoscopes.base.sender import BaseRequestsSender
 from tests.horoscopes.test_base.test_fabrics import TestRequestFabric
 

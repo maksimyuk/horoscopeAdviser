@@ -3,10 +3,11 @@ import os
 import alembic
 import pytest
 from alembic.config import Config
-from server.settings.components.database import get_database_url
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
 from sqlalchemy_utils import create_database, database_exists, drop_database
+
+from server.settings.components.database import get_database_url
 
 
 @pytest.fixture(scope="session")

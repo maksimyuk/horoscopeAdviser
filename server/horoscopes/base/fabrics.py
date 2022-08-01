@@ -2,6 +2,7 @@ import abc
 from typing import Any
 
 import requests
+
 from server.horoscopes.enums import HoroscopeSigns
 
 OptionalAnyDictType = dict[str, Any] | None

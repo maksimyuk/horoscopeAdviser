@@ -1,6 +1,8 @@
+from sqlalchemy.orm import Session
+
+from server.horoscopes.base.sql_utils import try_flush_commit
 from server.horoscopes.db.session import session as _session
 from server.horoscopes.models.user import User
-from sqlalchemy.orm import Session
 
 
 class UserManager:
@@ -9,11 +11,34 @@ class UserManager:
     def __init__(self) -> None:
         self.model = User
 
-    def create(self, telegram_user_id: int, session: Session = _session) -> User:
-        new_user = self.model(
-            telegram_user_id=telegram_user_id,
-        )
-        session.add(new_user)
-        session.commit()
+    def get_instance(self, session: Session = _session, **kwargs) -> User | None:
+        """Returns instance by given filters."""
+        return session.query(self.model).filter_by(**kwargs).one_or_none()
 
-        return new_user
+    def create(
+        self, session: Session = _session, commit: bool = True, **kwargs
+    ) -> tuple[User | None, bool]:
+        """Add new user to bot."""
+        instance = self.get_instance(session=session, **kwargs)
+        if instance:
+            return instance, False
+
+        instance = self.model(**kwargs)
+        session.add(instance)
+
+        try_flush_commit(session=session, commit=commit)
+
+        return instance, True
+
+    def remove(
+        self, session: Session = _session, commit: bool = True, **kwargs
+    ) -> bool:
+        """Remove user from bot."""
+        instance = self.get_instance(session=session, **kwargs)
+        if not instance:
+            return False
+
+        session.delete(instance)
+        try_flush_commit(session=session, commit=commit)
+
+        return True

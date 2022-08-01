@@ -1,6 +1,7 @@
+from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey
+
 from server.horoscopes.db.base import Base  # type: ignore
 from server.horoscopes.enums import HoroscopeSigns, NotificationFrequency
-from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey
 
 
 class HoroscopeSubscription(Base):
@@ -22,6 +23,7 @@ class HoroscopeSubscription(Base):
         doc="Frequency of notification to send to user",
     )
 
+    # TODO fix field type to time only
     notification_datetime = Column(
         DateTime(timezone=True),
         doc="Date and time of sending notification",
@@ -31,3 +33,5 @@ class HoroscopeSubscription(Base):
         Enum(HoroscopeSigns),
         doc="Sign of horoscope subscription for",
     )
+
+    #  TODO add field type of horoscope source

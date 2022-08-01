@@ -1,43 +1,36 @@
-import telebot
+import asyncio
+import logging
+
+from aiogram import Bot, Dispatcher
+from aiogram.contrib.fsm_storage.memory import MemoryStorage
 from server.settings.components.telegram_bot import SECRET_TOKEN
-from server.telegram_bot.handlers import (
-    dumb_handler,
-    get_today_horoscope_by_sign_handler,
-    start_handler,
+from server.telegram_bot.handlers import (  # get_today_horoscope_by_sign_handler,
+    register_subscription_message_handlers,
     unknown_command_handler,
 )
 
-bot = telebot.TeleBot(SECRET_TOKEN)
+logging.basicConfig(level=logging.INFO)
 
 
-def register_message_handlers() -> None:
+def register_message_handlers(dp: Dispatcher) -> None:
     """Register all message handlers to bot."""
-    bot.register_message_handler(start_handler, commands=["start"], pass_bot=True)
-    bot.register_message_handler(
-        get_today_horoscope_by_sign_handler,
-        commands=["get_today_horoscope"],
-        pass_bot=True,
-    )
-    bot.register_message_handler(
-        unknown_command_handler, func=lambda m: True, pass_bot=True
-    )
+    register_subscription_message_handlers(dp)
+
+    dp.register_message_handler(unknown_command_handler, lambda msg: True)
 
 
-def register_callback_handlers() -> None:
-    """Register all callback handlers to bot."""
-    bot.register_callback_query_handler(
-        dumb_handler,
-        func=lambda call: True,
-        pass_bot=True,
-    )
-
-
-def run():
+async def run():
     """Start bot."""
-    bot.infinity_polling()
+    bot = Bot(token=SECRET_TOKEN)
+
+    storage = MemoryStorage()
+    dp = Dispatcher(bot, storage=storage)
+
+    register_message_handlers(dp)
+
+    await dp.skip_updates()
+    await dp.start_polling()
 
 
-register_message_handlers()
-register_callback_handlers()
-
-run()
+if __name__ == "__main__":
+    asyncio.run(run())
