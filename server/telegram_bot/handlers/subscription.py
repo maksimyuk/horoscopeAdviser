@@ -112,6 +112,7 @@ async def period_chosen(message: Message, state: FSMContext):
 
         await message.reply(
             text(
+                text("Добавлен пользователь со следующими данными: "),
                 text("Sign: ", bold(data["sign"])),
                 text("Source: ", bold(data["source"])),
                 text("Period: ", bold(data["period"])),
@@ -120,6 +121,14 @@ async def period_chosen(message: Message, state: FSMContext):
             reply_markup=markup,
             parse_mode=ParseMode.MARKDOWN,
         )
+
+        # Add user to subscription
+        instance, created = UserManager().create(telegram_user_id=message.from_user.id)
+        if not created:
+            if instance:
+                await message.reply("Вы уже подписались на рассылку")
+            else:
+                await message.reply("Что-то пошло не так. Попробуйте ещё раз")
 
     await state.finish()
 
