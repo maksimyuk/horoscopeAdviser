@@ -53,22 +53,19 @@ class UserManager:
 class SubscriptionManager:
     """Manager for subscription model."""
 
-    def __init__(self) -> None:
-        self.model = Subscription
-
-    def get_instance(
-        self, session: Session = _session, **kwargs
-    ) -> Subscription | None:
+    @classmethod
+    def get_instance(cls, session: Session = _session, **kwargs) -> Subscription | None:
         """Returns instance of Subscription by given filters."""
         return (
-            session.query(self.model)
-            .options(joinedload(self.model.user))
+            session.query(Subscription)
+            .options(joinedload(Subscription.user))
             .filter_by(**kwargs)
             .one_or_none()
         )
 
+    @classmethod
     def create(
-        self,
+        cls,
         user_id: int,
         notification_frequency: NotificationFrequency,
         sign: HoroscopeSigns,

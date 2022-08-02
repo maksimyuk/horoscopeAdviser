@@ -1,4 +1,4 @@
-from sqlalchemy import Boolean, Column, Enum, ForeignKey, Time
+from sqlalchemy import Boolean, Column, Enum, ForeignKey, Time, UniqueConstraint
 from sqlalchemy.orm import relationship
 
 from server.horoscopes.db.base import Base
@@ -11,6 +11,10 @@ from server.horoscopes.enums import (
 
 class Subscription(Base):
     """User's Subscription to notification sb schema."""
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "notification_frequency", "sign", "source"),
+    )
 
     active: bool = Column(
         Boolean(),
