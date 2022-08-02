@@ -1,4 +1,5 @@
 from sqlalchemy import Boolean, Column, Enum, ForeignKey, Time
+from sqlalchemy.orm import relationship
 
 from server.horoscopes.db.base import Base
 from server.horoscopes.enums import (
@@ -36,3 +37,7 @@ class Subscription(Base):
         Enum(Sources),
         doc="Source of horoscope subscription",
     )
+
+    user = relationship("User")
+
+    # TODO add UNIQUE for user_id, notification_frequency, sign, source

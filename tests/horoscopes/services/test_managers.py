@@ -8,6 +8,6 @@ class TestUserManager:
     def test_create_user(self, temp_db_session):
         assert temp_db_session.query(User).count() == 0
 
-        UserManager().create(telegram_user_id=1, session=temp_db_session)
+        UserManager().get_or_create(telegram_user_id=1, session=temp_db_session)
 
         assert temp_db_session.query(User).count() == 1

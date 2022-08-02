@@ -123,7 +123,9 @@ async def period_chosen(message: Message, state: FSMContext):
         )
 
         # Add user to subscription
-        instance, created = UserManager().create(telegram_user_id=message.from_user.id)
+        instance, created = UserManager().get_or_create(
+            telegram_user_id=message.from_user.id
+        )
         if not created:
             if instance:
                 await message.reply("Вы уже подписались на рассылку")

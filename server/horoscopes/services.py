@@ -1,7 +1,13 @@
-from sqlalchemy.orm import Session
+from sqlalchemy.orm import Session, joinedload
 
 from server.horoscopes.base.sql_utils import try_flush_commit
 from server.horoscopes.db.session import session as _session
+from server.horoscopes.enums import (
+    HoroscopeSigns,
+    NotificationFrequency,
+    Sources,
+)
+from server.horoscopes.models.subscription import Subscription
 from server.horoscopes.models.user import User
 
 
@@ -15,13 +21,13 @@ class UserManager:
         """Returns instance by given filters."""
         return session.query(self.model).filter_by(**kwargs).one_or_none()
 
-    def create(
+    def get_or_create(
         self, session: Session = _session, commit: bool = True, **kwargs
     ) -> tuple[User | None, bool]:
         """Add new user to bot."""
         instance = self.get_instance(session=session, **kwargs)
         if instance:
-            return instance, False
+            return instance, bool(instance)
 
         instance = self.model(**kwargs)
         session.add(instance)
@@ -42,3 +48,42 @@ class UserManager:
         try_flush_commit(session=session, commit=commit)
 
         return True
+
+
+class SubscriptionManager:
+    """Manager for subscription model."""
+
+    def __init__(self) -> None:
+        self.model = Subscription
+
+    def get_instance(
+        self, session: Session = _session, **kwargs
+    ) -> Subscription | None:
+        """Returns instance of Subscription by given filters."""
+        return (
+            session.query(self.model)
+            .options(joinedload(self.model.user))
+            .filter_by(**kwargs)
+            .one_or_none()
+        )
+
+    def create(
+        self,
+        user_id: int,
+        notification_frequency: NotificationFrequency,
+        sign: HoroscopeSigns,
+        source: Sources,
+        session: Session = _session,
+        commit: bool = True,
+    ) -> Subscription:
+        """Creates instance of subscription with given params."""
+        # TODO add check exists
+        instance = Subscription(
+            user_id=user_id,
+            notification_frequency=notification_frequency,
+            sign=sign,
+            source=source,
+        )
+        try_flush_commit(session=session, commit=commit)
+
+        return instance
