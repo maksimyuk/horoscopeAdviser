@@ -33,3 +33,10 @@ class NotificationFrequency(Enum):
 
     DAILY = "DAILY"
     WEEKLY = "WEEKLY"
+
+
+class Sources(Enum):
+    """Enum for describing sources of horoscopes."""
+
+    HORO_1001 = "1001"
+    HORO_MAIL = "mail"

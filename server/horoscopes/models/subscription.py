@@ -1,10 +1,14 @@
-from sqlalchemy import Boolean, Column, DateTime, Enum, ForeignKey
+from sqlalchemy import Boolean, Column, Enum, ForeignKey, Time
 
-from server.horoscopes.db.base import Base  # type: ignore
-from server.horoscopes.enums import HoroscopeSigns, NotificationFrequency
+from server.horoscopes.db.base import Base
+from server.horoscopes.enums import (
+    HoroscopeSigns,
+    NotificationFrequency,
+    Sources,
+)
 
 
-class HoroscopeSubscription(Base):
+class Subscription(Base):
     """User's Subscription to notification sb schema."""
 
     active: bool = Column(
@@ -12,26 +16,23 @@ class HoroscopeSubscription(Base):
         doc="Is subscription active",
         default=True,
     )
-
     user_id: int = Column(
         ForeignKey("horoscopes.models.user.User", ondelete="CASCADE"),
         doc="Reference to telegram-user model",
     )
-
     notification_frequency = Column(
         Enum(NotificationFrequency),
         doc="Frequency of notification to send to user",
     )
-
-    # TODO fix field type to time only
     notification_datetime = Column(
-        DateTime(timezone=True),
+        Time(timezone=True),
         doc="Date and time of sending notification",
     )
-
-    horoscope_sign = Column(
+    sign = Column(
         Enum(HoroscopeSigns),
         doc="Sign of horoscope subscription for",
     )
-
-    #  TODO add field type of horoscope source
+    source = Column(
+        Enum(Sources),
+        doc="Source of horoscope subscription",
+    )
