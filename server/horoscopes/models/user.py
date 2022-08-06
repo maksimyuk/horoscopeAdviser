@@ -1,12 +1,15 @@
 import datetime
 
 from sqlalchemy import Column, DateTime, Integer, func
+from sqlalchemy.orm import relationship
 
 from server.horoscopes.db.base import Base  # type: ignore
 
 
 class User(Base):
     """User db schema."""
+
+    __tablename__ = "users"
 
     time_created: datetime.datetime = Column(
         DateTime(timezone=True),
@@ -18,3 +21,5 @@ class User(Base):
         Integer(),
         doc="ID of user inside telegram",
     )
+
+    subscription = relationship("Subscription", back_populates="user")

@@ -29,10 +29,12 @@ class UserManager:
     def __init__(self) -> None:
         self.model = User
 
+    # TODO change to class method
     def get_instance(self, session: Session = _session, **kwargs) -> User | None:
         """Returns instance by given filters."""
         return session.query(self.model).filter_by(**kwargs).one_or_none()
 
+    # TODO change to class method
     def get_or_create(
         self, session: Session = _session, commit: bool = True, **kwargs
     ) -> tuple[User | None, bool]:
@@ -48,6 +50,7 @@ class UserManager:
 
         return instance, True
 
+    # TODO change to class method
     def remove(
         self, session: Session = _session, commit: bool = True, **kwargs
     ) -> bool:
@@ -116,6 +119,7 @@ class SubscriptionManager:
             sign=sign,
             source=source,
         )
+        session.add(instance)
         try_flush_commit(session=session, commit=commit)
 
         return instance

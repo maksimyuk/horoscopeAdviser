@@ -12,6 +12,7 @@ from server.horoscopes.enums import (
 class Subscription(Base):
     """User's Subscription to notification sb schema."""
 
+    __tablename__ = "subscription"
     __table_args__ = (
         UniqueConstraint("user_id", "notification_frequency", "sign", "source"),
     )
@@ -22,7 +23,7 @@ class Subscription(Base):
         default=True,
     )
     user_id: int = Column(
-        ForeignKey("horoscopes.models.user.User", ondelete="CASCADE"),
+        ForeignKey("users.id", ondelete="CASCADE"),
         doc="Reference to telegram-user model",
     )
     notification_frequency = Column(
@@ -42,6 +43,6 @@ class Subscription(Base):
         doc="Source of horoscope subscription",
     )
 
-    user = relationship("User")
+    user = relationship("User", back_populates="subscription")
 
     # TODO add UNIQUE for user_id, notification_frequency, sign, source
