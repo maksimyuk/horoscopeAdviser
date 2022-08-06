@@ -1,3 +1,5 @@
+from dataclasses import dataclass
+
 from sqlalchemy.orm import Session, joinedload
 
 from server.horoscopes.base.sql_utils import try_flush_commit
@@ -9,6 +11,16 @@ from server.horoscopes.enums import (
 )
 from server.horoscopes.models.subscription import Subscription
 from server.horoscopes.models.user import User
+from server.telegram_bot.exception import LogicException
+
+
+@dataclass
+class UserSubscription:
+    """Data-class for describing current user's subscription settings."""
+
+    sign: HoroscopeSigns
+    source: Sources
+    notification_frequency: NotificationFrequency
 
 
 class UserManager:
@@ -64,6 +76,21 @@ class SubscriptionManager:
         )
 
     @classmethod
+    def get_subscription_info(
+        cls, user_id: int, session: Session = _session
+    ) -> UserSubscription:
+        """Returns info about current user subscription."""
+        subscription = cls.get_instance(session=session, user_id=user_id)
+        if not subscription:
+            raise LogicException("Подписка пользователя не найдена")
+
+        return UserSubscription(
+            sign=subscription.sign,
+            source=subscription.source,
+            notification_frequency=subscription.notification_frequency,
+        )
+
+    @classmethod
     def create(
         cls,
         user_id: int,
@@ -74,7 +101,15 @@ class SubscriptionManager:
         commit: bool = True,
     ) -> Subscription:
         """Creates instance of subscription with given params."""
-        # TODO add check exists
+
+        if cls.get_instance(session=session, user_id=user_id):
+            existed_subscription = cls.get_subscription_info(
+                user_id=user_id, session=session
+            )
+            raise LogicException(
+                f"Пользователь уже подписан на рассылку: {existed_subscription}"
+            )
+
         instance = Subscription(
             user_id=user_id,
             notification_frequency=notification_frequency,
