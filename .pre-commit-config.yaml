@@ -11,7 +11,7 @@ repos:
     rev: 22.3.0
     hooks:
     - id: black
-      args: [--check]
+      args: [--check, --diff]
 
 -   repo: https://gitlab.com/pycqa/flake8
     rev: 4.0.1
@@ -23,3 +23,4 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
+        args: [--check, --diff]
