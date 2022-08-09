@@ -6,20 +6,15 @@ from server.horoscopes.enums import (
     Sources,
 )
 from server.horoscopes.models.subscription import Subscription
-from server.horoscopes.services import SubscriptionManager, UserManager
+from server.horoscopes.services import SubscriptionManager
 
 
 class TestSubscriptionManager:
     """Test-case for checking work of manager with Subscription-model."""
 
-    def test_create_subscription(self, temp_db_session):
+    def test_create_subscription(self, temp_db_session, user):
         """Check new subscription is added."""
         assert temp_db_session.query(Subscription).count() == 0
-
-        user, *_ = UserManager().get_or_create(
-            telegram_user_id=1,
-            session=temp_db_session,
-        )
 
         SubscriptionManager.create(
             session=temp_db_session,
