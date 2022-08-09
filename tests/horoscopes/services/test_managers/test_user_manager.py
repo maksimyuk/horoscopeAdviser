@@ -11,12 +11,7 @@ class TestUserManager:
     def test_create_user(
         self, temp_db_session, telegram_user_id: int, users_count: int
     ):
-        assert (
-            temp_db_session.query(User)
-            .filter_by(telegram_user_id=telegram_user_id)
-            .count()
-            == 0
-        )
+        assert temp_db_session.query(User).count() == 0
 
         UserManager().get_or_create(
             telegram_user_id=telegram_user_id, session=temp_db_session
