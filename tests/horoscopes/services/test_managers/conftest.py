@@ -14,3 +14,15 @@ def user(temp_db_session, telegram_user_id: int = None):
     )
 
     return user
+
+
+@pytest.fixture(
+    scope="function",
+    params=[
+        "telegram_user_id",
+    ],
+)
+def subscription(temp_db_session, user):
+    """Fixture for creating subscription instance."""
+    # TODO add fixture with parameters user fixture
+    pass
