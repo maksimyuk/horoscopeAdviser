@@ -54,4 +54,16 @@ def apply_migrations(temp_db):
 @pytest.fixture()
 def temp_db_session(temp_db_engine, apply_migrations):
     """Fixture for generating test db session."""
-    yield Session(temp_db_engine)
+    connection = temp_db_engine.connect()
+
+    # begin the nested transaction
+    transaction = connection.begin()
+
+    session = Session(bind=connection)
+    yield session
+
+    session.close()
+    # rollback the broader transaction
+    transaction.rollback()
+    # put back the connection to the connection pool
+    connection.close()
