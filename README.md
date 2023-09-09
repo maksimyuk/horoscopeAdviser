@@ -11,3 +11,11 @@ Small app, that can give you horoscope from different sources.
 3. PostgreSQL
 4. aiohttp
 5. Docker, docker compose
+
+## Development
+
+#### Make lint, tests
+```shell
+make -C src lint
+make -C src test
+```
