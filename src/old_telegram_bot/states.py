@@ -6,5 +6,5 @@ class AddSubscriptionStates(StatesGroup):
 
     waiting_for_sign = State()
     waiting_for_source = State()
-    waiting_for_period = State()
+    # waiting_for_period = State()
     # waiting_for_approve = State()
