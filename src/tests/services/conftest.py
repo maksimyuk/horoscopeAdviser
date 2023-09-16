@@ -2,6 +2,8 @@ import pathlib
 
 import pytest_asyncio
 
+from tests.factories.user import UserFactory
+
 _CURRENT_PATH = pathlib.Path(__file__).resolve()
 _EXAMPLES_PATH = _CURRENT_PATH.parent.joinpath("examples")
 
@@ -44,3 +46,8 @@ async def thousand_and_one_today() -> str:
         "Романтичным оно будет едва ли, а вот в материальном смысле окажется перспективным. "
         "В любом случае, сегодня Овну очень не помешает держать нос по ветру – может запахнуть деньгами!"
     )
+
+
+@pytest_asyncio.fixture(scope="session")
+async def base_user(async_db_session):
+    return await UserFactory.create(session=async_db_session)

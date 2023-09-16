@@ -15,9 +15,11 @@ class User(BaseModel):
         doc="Date and time of creating user",
     )
     # TODO add unique
-    telegram_user_id: int = Column(
+    telegram_user_id: int | None = Column(
         Integer(),
         doc="ID of user inside telegram",
+        nullable=True,
+        unique=True,
     )
 
-    subscription = relationship("Subscription", back_populates="user")
+    subscription = relationship("Subscription", back_populates="user", foreign_keys="Subscription.user_id")

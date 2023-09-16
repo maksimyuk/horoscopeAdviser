@@ -19,3 +19,23 @@ Small app, that can give you horoscope from different sources.
 make -C src lint
 make -C src test
 ```
+
+## Migrations
+
+#### Generate new migration
+```shell
+cd src/
+alembic revision --autogenerate -m "Migration Name"
+```
+
+#### Run migrations
+```shell
+cd src/
+alembic upgrade head
+```
+
+#### Downgrade last migration
+```shell
+cd src/
+alembic downgrade -1
+```
