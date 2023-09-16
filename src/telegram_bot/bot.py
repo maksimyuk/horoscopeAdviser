@@ -1,11 +1,10 @@
 import asyncio
 
-from aiogram import Bot, Dispatcher, Router
+from aiogram import Bot, Dispatcher
 
 from core.config import settings
-from telegram_bot.routers.horoscope import horoscope_router
-
-form_router = Router()
+from telegram_bot.routers.common import common_router
+from telegram_bot.routers.default_settings import default_settings_router
 
 
 async def run(secret_token: str = settings().TELEGRAM_SECRET_TOKEN) -> None:
@@ -13,8 +12,8 @@ async def run(secret_token: str = settings().TELEGRAM_SECRET_TOKEN) -> None:
 
     dp = Dispatcher()
 
-    dp.include_router(form_router)
-    dp.include_router(horoscope_router)
+    dp.include_router(common_router)
+    dp.include_router(default_settings_router)
 
     await dp.start_polling(bot)
 

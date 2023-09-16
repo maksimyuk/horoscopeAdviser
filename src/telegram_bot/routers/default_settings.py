@@ -9,7 +9,7 @@ from aiogram.types import Message, ReplyKeyboardMarkup
 from telegram_bot.keyboards.horoscope_signs import get_all_signs_keyboard_buttons
 from telegram_bot.keyboards.sources import get_all_sources_keyboard_buttons
 
-horoscope_router = Router()
+default_settings_router = Router()
 
 
 class HoroscopeSettingsStates(StatesGroup):
@@ -19,7 +19,7 @@ class HoroscopeSettingsStates(StatesGroup):
     sign = State()
 
 
-@horoscope_router.message(Command("default_settings"))
+@default_settings_router.message(Command("default_settings"))
 async def command_setup_defaults(message: Message, state: FSMContext) -> None:
     await state.set_state(HoroscopeSettingsStates.source)
     await message.answer(
@@ -35,7 +35,7 @@ async def command_setup_defaults(message: Message, state: FSMContext) -> None:
     )
 
 
-@horoscope_router.message(HoroscopeSettingsStates.source)
+@default_settings_router.message(HoroscopeSettingsStates.source)
 async def process_source(message: Message, state: FSMContext) -> None:
     await state.update_data(source=message.text)
     await state.set_state(HoroscopeSettingsStates.sign)
@@ -53,7 +53,7 @@ async def process_source(message: Message, state: FSMContext) -> None:
     )
 
 
-@horoscope_router.message(HoroscopeSettingsStates.sign)
+@default_settings_router.message(HoroscopeSettingsStates.sign)
 async def process_sign(message: Message, state: FSMContext) -> None:
     data = await state.update_data(sign=message.text)
     await state.clear()
