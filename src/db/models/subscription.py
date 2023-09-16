@@ -9,9 +9,7 @@ from .base import BaseModel
 class Subscription(BaseModel):
     """User's Subscription to notification sb schema."""
 
-    __table_args__ = (
-        UniqueConstraint("user_id", "notification_frequency", "sign", "source"),
-    )
+    __table_args__ = (UniqueConstraint("user_id", "notification_frequency", "sign", "source"),)
 
     active: bool = Column(
         Boolean(),

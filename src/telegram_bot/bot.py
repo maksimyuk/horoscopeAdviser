@@ -1,36 +1,23 @@
 import asyncio
-import logging
 
 from aiogram import Bot, Dispatcher
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
-from src.settings.components.telegram_bot import SECRET_TOKEN
-from src.telegram_bot.handlers import (  # get_today_horoscope_by_sign_handler,
-    register_subscription_message_handlers,
-    unknown_command_handler,
-)
 
-logging.basicConfig(level=logging.INFO)
+from core.config import settings
+from telegram_bot.routers.common import common_router
+from telegram_bot.routers.default_settings import default_settings_router
 
 
-def register_message_handlers(dp: Dispatcher) -> None:
-    """Register all message handlers to bot."""
-    register_subscription_message_handlers(dp)
+async def run(secret_token: str = settings().TELEGRAM_SECRET_TOKEN) -> None:
+    bot = Bot(token=secret_token)
 
-    dp.register_message_handler(unknown_command_handler, lambda msg: True)
+    dp = Dispatcher()
 
+    dp.include_router(common_router)
+    dp.include_router(default_settings_router)
 
-async def run():
-    """Start bot."""
-    bot = Bot(token=SECRET_TOKEN)
-
-    storage = MemoryStorage()
-    dp = Dispatcher(bot, storage=storage)
-
-    register_message_handlers(dp)
-
-    await dp.skip_updates()
-    await dp.start_polling()
+    await dp.start_polling(bot)
 
 
 if __name__ == "__main__":
+    # logging.basicConfig(level=logging.INFO, stream=sys.stdout)
     asyncio.run(run())

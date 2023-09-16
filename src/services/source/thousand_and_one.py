@@ -2,12 +2,8 @@ import asyncio
 
 from core.const import THOUSAND_AND_ONE_SOURCE_URL
 from db.enums import HoroscopeSigns
-from services.scrappers.thousand_and_one.get_today_sign import (
-    GetTodaySignScrapper,
-)
-from services.senders.thousand_and_one.get_today_sign import (
-    GetTodaySignProvider,
-)
+from services.scrappers.thousand_and_one.get_today_sign import GetTodaySignScrapper
+from services.senders.thousand_and_one.get_today_sign import GetTodaySignProvider
 from services.source.base import BaseSource
 
 
@@ -23,7 +19,5 @@ class ThousandAndOneSource(BaseSource):
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
-    x = loop.run_until_complete(
-        ThousandAndOneSource.get_today_by_sign(HoroscopeSigns.ARIES)
-    )
+    x = loop.run_until_complete(ThousandAndOneSource.get_today_by_sign(HoroscopeSigns.ARIES))
     print(x)
