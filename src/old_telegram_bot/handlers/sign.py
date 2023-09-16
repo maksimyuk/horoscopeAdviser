@@ -1,5 +1,6 @@
-from db.enums import get_all_horoscope_signs
 from telebot import TeleBot, types
+
+from db.enums import get_all_horoscope_signs
 
 
 def dumb_handler(call: types.CallbackQuery, bot: TeleBot) -> None:

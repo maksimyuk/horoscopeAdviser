@@ -4,11 +4,11 @@ import typing
 
 import alembic.command
 import pytest
+import pytest_asyncio
 from alembic.config import Config
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
 from sqlalchemy_utils import create_database, database_exists, drop_database
 
-import pytest_asyncio
 from core.config import settings
 from db.session import get_engine
 
@@ -47,18 +47,14 @@ async def async_db_engine(test_environment) -> typing.AsyncGenerator[AsyncEngine
 @pytest.fixture(scope="session")
 def apply_migrations() -> typing.Generator[None, None, None]:
     config = Config(os.path.join(settings().BASE_DIR, "alembic.ini"))
-    config.set_main_option(
-        "script_location", os.path.join(settings().BASE_DIR, "migrations")
-    )
+    config.set_main_option("script_location", os.path.join(settings().BASE_DIR, "migrations"))
     alembic.command.upgrade(config, "head")
     yield
     alembic.command.downgrade(config, "base")
 
 
 @pytest_asyncio.fixture(scope="function")
-async def async_db_session(
-    async_db_engine: AsyncEngine, apply_migrations
-) -> typing.AsyncGenerator[AsyncSession, None]:
+async def async_db_session(async_db_engine: AsyncEngine, apply_migrations) -> typing.AsyncGenerator[AsyncSession, None]:
     async with async_db_engine.connect() as conn:
         async with conn.begin() as transaction:
             session = AsyncSession(bind=conn, expire_on_commit=False)

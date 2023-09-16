@@ -1,6 +1,7 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher, Router
+
 from core.config import settings
 from telegram_bot.routers.horoscope import horoscope_router
 

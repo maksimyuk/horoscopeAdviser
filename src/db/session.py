@@ -13,9 +13,7 @@ from core.config import settings
 
 
 @functools.lru_cache
-def get_engine(
-    url: str | URL | None = settings().postgres_dsn, **kwargs
-) -> AsyncEngine:
+def get_engine(url: str | URL | None = settings().postgres_dsn, **kwargs) -> AsyncEngine:
     return create_async_engine(url, echo=False, future=True, **kwargs)
 
 

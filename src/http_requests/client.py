@@ -13,8 +13,4 @@ class HTTPClient:
             async with session.get(self._url, params=params) as response:
                 response.raise_for_status()
                 page_encoding = response.get_encoding()
-                return await (
-                    response.text(encoding=page_encoding)
-                    if page_encoding
-                    else response.text()
-                )
+                return await (response.text(encoding=page_encoding) if page_encoding else response.text())

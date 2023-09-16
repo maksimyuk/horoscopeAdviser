@@ -3,6 +3,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 from aiogram.contrib.fsm_storage.memory import MemoryStorage
+
 from src.settings.components.telegram_bot import SECRET_TOKEN
 from src.telegram_bot.handlers import (  # get_today_horoscope_by_sign_handler,
     register_subscription_message_handlers,

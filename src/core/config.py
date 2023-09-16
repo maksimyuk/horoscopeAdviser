@@ -14,9 +14,7 @@ class Settings(BaseSettings):
 
     BASE_DIR: pathlib.Path = _BASE_DIR
 
-    model_config = SettingsConfigDict(
-        env_file=_CONFIG_DIR.joinpath(".env"), env_file_encoding="utf-8"
-    )
+    model_config = SettingsConfigDict(env_file=_CONFIG_DIR.joinpath(".env"), env_file_encoding="utf-8")
 
     ENVIRONMENT: str = "local"
 
@@ -32,11 +30,7 @@ class Settings(BaseSettings):
 
     @property
     def postgres_dsn(self) -> str:
-        database = (
-            self.POSTGRES_DB
-            if self.ENVIRONMENT != TEST_ENVIRONMENT_NAME
-            else f"{self.POSTGRES_DB}_test"
-        )
+        database = self.POSTGRES_DB if self.ENVIRONMENT != TEST_ENVIRONMENT_NAME else f"{self.POSTGRES_DB}_test"
         return (
             f"postgresql+asyncpg://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@"
             f"{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{database}"

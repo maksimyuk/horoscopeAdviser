@@ -11,6 +11,7 @@ from aiogram.types import (
 )
 from aiogram.utils.callback_data import CallbackData
 from aiogram.utils.markdown import bold, text
+
 from db.enums import get_all_horoscope_signs
 from src.horoscopes.services import UserManager
 from src.telegram_bot.states import AddSubscriptionStates
@@ -83,9 +84,7 @@ async def sign_chosen(message: Message, state: FSMContext):
 
 async def chosen_incorrect_value_from_keyboard(message: Message):
     """Process user chosen sign and ask for source."""
-    return await message.reply(
-        "Введено некорректное значение. Выберите значение представленное на клавиатуре"
-    )
+    return await message.reply("Введено некорректное значение. Выберите значение представленное на клавиатуре")
 
 
 async def source_chosen(message: Message, state: FSMContext):
@@ -123,9 +122,7 @@ async def period_chosen(message: Message, state: FSMContext):
         )
 
         # Add user to subscription
-        instance, created = UserManager().get_or_create(
-            telegram_user_id=message.from_user.id
-        )
+        instance, created = UserManager().get_or_create(telegram_user_id=message.from_user.id)
         if not created:
             if instance:
                 await message.reply("Вы уже подписались на рассылку")
@@ -227,26 +224,16 @@ async def subscription_callback_delete(message: Message) -> None:
 
 def register_edit_subscription_message_handlers(dp: Dispatcher):
     """Register message handlers for edit subscription."""
-    dp.register_message_handler(
-        subscription_callback_edit, commands=["subscription_edit"]
-    )
+    dp.register_message_handler(subscription_callback_edit, commands=["subscription_edit"])
 
-    dp.register_callback_query_handler(
-        subscription_callback_edit_sign, SUBSCRIPTION_EDIT_CB.filter(action="sign")
-    )
-    dp.register_callback_query_handler(
-        subscription_callback_edit_source, SUBSCRIPTION_EDIT_CB.filter(action="source")
-    )
-    dp.register_callback_query_handler(
-        subscription_callback_edit_period, SUBSCRIPTION_EDIT_CB.filter(action="period")
-    )
+    dp.register_callback_query_handler(subscription_callback_edit_sign, SUBSCRIPTION_EDIT_CB.filter(action="sign"))
+    dp.register_callback_query_handler(subscription_callback_edit_source, SUBSCRIPTION_EDIT_CB.filter(action="source"))
+    dp.register_callback_query_handler(subscription_callback_edit_period, SUBSCRIPTION_EDIT_CB.filter(action="period"))
 
 
 def register_delete_subscription_message_handlers(dp: Dispatcher):
     """Register message handlers for delete subscription."""
-    dp.register_message_handler(
-        subscription_callback_delete, commands=["subscription_delete"]
-    )
+    dp.register_message_handler(subscription_callback_delete, commands=["subscription_delete"])
 
 
 def register_subscription_message_handlers(dp: Dispatcher) -> None:

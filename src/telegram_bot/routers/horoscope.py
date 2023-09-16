@@ -60,9 +60,7 @@ async def process_sign(message: Message, state: FSMContext) -> None:
     await show_summary(message=message, data=data)
 
 
-async def show_summary(
-    message: Message, data: dict[str, Any], positive: bool = True
-) -> None:
+async def show_summary(message: Message, data: dict[str, Any], positive: bool = True) -> None:
     source = data["source"]
     sign = data["sign"]
 

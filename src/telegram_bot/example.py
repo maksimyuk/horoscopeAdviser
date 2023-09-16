@@ -104,16 +104,12 @@ async def process_language(message: Message, state: FSMContext) -> None:
     await state.clear()
 
     if message.text.casefold() == "python":
-        await message.reply(
-            "Python, you say? That's the language that makes my circuits light up! 😉"
-        )
+        await message.reply("Python, you say? That's the language that makes my circuits light up! 😉")
 
     await show_summary(message=message, data=data)
 
 
-async def show_summary(
-    message: Message, data: Dict[str, Any], positive: bool = True
-) -> None:
+async def show_summary(message: Message, data: Dict[str, Any], positive: bool = True) -> None:
     name = data["name"]
     language = data.get("language", "<something unexpected>")
     text = f"I'll keep in mind that, {html.quote(name)}, "
