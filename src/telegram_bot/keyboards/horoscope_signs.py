@@ -8,6 +8,4 @@ from db.enums import get_all_horoscope_signs
 
 @lru_cache
 def get_all_signs_keyboard_buttons() -> Tuple[KeyboardButton]:
-    return tuple(
-        KeyboardButton(text=each_sign) for each_sign in get_all_horoscope_signs()
-    )
+    return tuple(KeyboardButton(text=each_sign) for each_sign in get_all_horoscope_signs())

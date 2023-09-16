@@ -4,14 +4,10 @@ from aiogram import Router
 from aiogram.filters.command import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
+from aiogram.types import Message, ReplyKeyboardMarkup
 
-from telegram_bot.keyboards.horoscope_signs import (
-    get_all_signs_keyboard_buttons,
-)
-from telegram_bot.keyboards.sources import (
-    get_all_sources_keyboard_buttons,
-)
+from telegram_bot.keyboards.horoscope_signs import get_all_signs_keyboard_buttons
+from telegram_bot.keyboards.sources import get_all_sources_keyboard_buttons
 
 horoscope_router = Router()
 
