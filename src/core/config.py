@@ -1,17 +1,23 @@
 import functools
 import pathlib
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 from .const import TEST_ENVIRONMENT_NAME
 
 _BASE_DIR: pathlib.Path = pathlib.Path(__file__).resolve().parent.parent
+_CONFIG_DIR: pathlib.Path = _BASE_DIR.parent.joinpath("config")
 
 
 class Settings(BaseSettings):
     """Project settings."""
 
     BASE_DIR: pathlib.Path = _BASE_DIR
+
+    model_config = SettingsConfigDict(
+        env_file=_CONFIG_DIR.joinpath(".env"), env_file_encoding="utf-8"
+    )
+
     ENVIRONMENT: str = "local"
 
     POSTGRES_HOST: str = "localhost"

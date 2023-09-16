@@ -1,13 +1,12 @@
-
 from sqlalchemy import select
 
-from .base import BaseDatabaseRepository
 from db.models.user import User
 from schemas.user import CreateUserSchema
 
+from .base import BaseDatabaseRepository
+
 
 class UserRepository(BaseDatabaseRepository):
-
     async def create(self, create_data: CreateUserSchema):
         user = User(**create_data.model_dump())
 
