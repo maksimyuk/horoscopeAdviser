@@ -6,6 +6,13 @@ from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
 from aiogram.types import KeyboardButton, Message, ReplyKeyboardMarkup
 
+from telegram_bot.keyboards.horoscope_signs import (
+    get_all_signs_keyboard_buttons,
+)
+from telegram_bot.keyboards.sources import (
+    get_all_sources_keyboard_buttons,
+)
+
 horoscope_router = Router()
 
 
@@ -24,8 +31,7 @@ async def command_setup_defaults(message: Message, state: FSMContext) -> None:
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text="Source1"),
-                    KeyboardButton(text="Source2"),
+                    *get_all_sources_keyboard_buttons(),
                 ],
             ],
             resize_keyboard=True,
@@ -43,9 +49,8 @@ async def process_source(message: Message, state: FSMContext) -> None:
         reply_markup=ReplyKeyboardMarkup(
             keyboard=[
                 [
-                    KeyboardButton(text="Fish"),
-                    KeyboardButton(text="Aries"),
-                ]
+                    *get_all_signs_keyboard_buttons(),
+                ],
             ],
             resize_keyboard=True,
         ),
