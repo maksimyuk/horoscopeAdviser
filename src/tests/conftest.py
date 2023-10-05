@@ -7,18 +7,20 @@ import pytest
 import pytest_asyncio
 from alembic.config import Config
 from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession
-from sqlalchemy_utils import create_database, database_exists, drop_database
 
 from core.config import settings
+from core.const import TEST_ENVIRONMENT_NAME
 from db.session import get_engine
+
+from .utils import create_database, database_exists, drop_database
 
 pytestmark = pytest.mark.asyncio
 
 
 @pytest.fixture(scope="session")
-def test_environment():
+def set_test_environment():
     settings.cache_clear()
-    os.environ["TESTING"] = "1"
+    os.environ["ENVIRONMENT"] = TEST_ENVIRONMENT_NAME
 
 
 @pytest.fixture(scope="session")
@@ -29,7 +31,7 @@ def event_loop() -> typing.Generator[asyncio.AbstractEventLoop, None, None]:
 
 
 @pytest_asyncio.fixture(scope="session")
-async def async_db_engine(test_environment) -> typing.AsyncGenerator[AsyncEngine, None]:
+async def async_db_engine(set_test_environment) -> typing.AsyncGenerator[AsyncEngine, None]:
     if await database_exists(settings().postgres_dsn):
         await drop_database(settings().postgres_dsn)
 
@@ -50,7 +52,9 @@ def apply_migrations() -> typing.Generator[None, None, None]:
     config.set_main_option("script_location", os.path.join(settings().BASE_DIR, "migrations"))
     alembic.command.upgrade(config, "head")
     yield
-    alembic.command.downgrade(config, "base")
+
+    # FIXME: check sometimes fixture cleaning up ordering is incorrect
+    # alembic.command.downgrade(config, "base")
 
 
 @pytest_asyncio.fixture(scope="function")

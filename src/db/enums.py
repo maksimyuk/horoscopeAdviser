@@ -17,6 +17,10 @@ class HoroscopeSigns(Enum):
     AQUARIUS = "AQUARIUS"
     PISCES = "PISCES"
 
+    @classmethod
+    def get_by_value(cls, value: str) -> "HoroscopeSigns":
+        return cls(value.upper())
+
 
 class HoroMailHoroscopeSigns(Enum):
     ARIES = "aries"
@@ -70,3 +74,8 @@ class Sources(Enum):
 
     HORO_1001 = "1001"
     HORO_MAIL = "mail"
+
+    @classmethod
+    def get_by_value(cls, value: str) -> "Sources":
+        # TODO: duplicate
+        return cls(value.upper())

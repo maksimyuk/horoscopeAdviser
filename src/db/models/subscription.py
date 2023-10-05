@@ -1,40 +1,38 @@
-from sqlalchemy import Boolean, Column, Enum, ForeignKey, Time, UniqueConstraint
-from sqlalchemy.orm import relationship
+from sqlalchemy import Boolean, Enum, ForeignKey, UniqueConstraint
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from db.enums import HoroscopeSigns, NotificationFrequency, Sources
+from db.enums import HoroscopeSigns, Sources
 
 from .base import BaseModel
+from .user import User
 
 
 class Subscription(BaseModel):
     """User's Subscription to notification sb schema."""
 
-    __table_args__ = (UniqueConstraint("user_id", "notification_frequency", "sign", "source"),)
+    __table_args__ = (UniqueConstraint("user_id", "sign", "source"),)
 
-    active: bool = Column(
+    active: Mapped[bool] = mapped_column(
         Boolean(),
         doc="Is subscription active",
         default=True,
     )
-    user_id: int = Column(
+    user_id: Mapped[int] = mapped_column(
         ForeignKey("users.id", ondelete="CASCADE"),
+        unique=True,
         doc="Reference to telegram-user model",
     )
-    notification_frequency = Column(
-        Enum(NotificationFrequency),
-        doc="Frequency of notification to send to user",
-    )
-    notification_datetime = Column(
-        Time(timezone=True),
-        doc="Date and time of sending notification",
-    )
-    sign = Column(
+    sign: Mapped[HoroscopeSigns] = mapped_column(
         Enum(HoroscopeSigns),
         doc="Sign of horoscope subscription for",
     )
-    source = Column(
+    source: Mapped[Sources] = mapped_column(
         Enum(Sources),
         doc="Source of horoscope subscription",
     )
 
-    user = relationship("User", back_populates="subscription")
+    user: Mapped[User] = relationship(  # type: ignore
+        "User",
+        back_populates="subscription",
+        foreign_keys="Subscription.user_id",
+    )

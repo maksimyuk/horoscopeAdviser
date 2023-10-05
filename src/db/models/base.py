@@ -1,12 +1,14 @@
 import inflection
-from sqlalchemy import MetaData
+from sqlalchemy import Integer, MetaData
 from sqlalchemy.ext.declarative import declared_attr
-from sqlalchemy.orm import DeclarativeBase, declarative_mixin
+from sqlalchemy.orm import DeclarativeBase, Mapped, declarative_mixin, mapped_column
 
 
 @declarative_mixin
 class BaseModel(DeclarativeBase):
     """Base db model class."""
+
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True, autoincrement=True)
 
     @declared_attr
     def __tablename__(cls) -> str:
